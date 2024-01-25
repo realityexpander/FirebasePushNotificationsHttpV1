@@ -44,7 +44,7 @@ class ChatViewModel: ViewModel() {  // Use a DI framework to inject the "api" de
         )
     }
 
-    fun onMessageChange(message: String) {
+    fun onMessageReceived(message: String) {
         state = state.copy(
             messageText = message
         )

@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun ChatScreen(
     messageText: String,
-    onMessageChange: (String) -> Unit,
+    onMessageReceived: (String) -> Unit,
     onMessageSend: () -> Unit,
     onMessageBroadcast: () -> Unit
 ) {
@@ -39,7 +39,7 @@ fun ChatScreen(
     ) {
         OutlinedTextField(
             value = messageText,
-            onValueChange = onMessageChange,
+            onValueChange = onMessageReceived,
             placeholder = {
                 Text("Enter a message")
             },

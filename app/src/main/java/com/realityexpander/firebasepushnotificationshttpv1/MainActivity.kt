@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
                             onMessageBroadcast = {
                                 viewModel.sendMessage(isBroadcast = true)
                             },
-                            onMessageChange = viewModel::onMessageChange
+                            onMessageReceived = viewModel::onMessageReceived
                         )
                     }
                 }
