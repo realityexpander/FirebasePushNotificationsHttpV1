@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "706814557538",
+    "project_id": "fir-pushnotifications-b9818",
+    "storage_bucket": "fir-pushnotifications-b9818.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706814557538:android:de7021ec52885fb386c03b",
+        "android_client_info": {
+          "package_name": "com.realityexpander.firebasepushnotificationshttpv1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBJLSeqtv2aBusnvEaRYPlG_YwiL_63to"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
