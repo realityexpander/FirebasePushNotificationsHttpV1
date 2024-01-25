@@ -15,14 +15,14 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
 import java.io.IOException
 
-class ChatViewModel: ViewModel() {
+class ChatViewModel: ViewModel() {  // Use a DI framework to inject the "api" dependency to make this testable
 
     var state by mutableStateOf(ChatState())
         private set
 
     private val api: FcmApi = Retrofit.Builder()
-        .baseUrl("http://10.0.2.2:8080/")
-        .addConverterFactory(MoshiConverterFactory.create())
+        .baseUrl("http://10.0.2.2:8080/") // using the local IP address of this computer running the server
+        .addConverterFactory(MoshiConverterFactory.create())// For JSON parsing
         .build()
         .create()
 
