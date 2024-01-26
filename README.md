@@ -7,3 +7,4 @@
 - Notifications only appear when App is in background / sleeping
 - When App is in foreground, the `PushNotificationService.kt` receives the messages and no notifications appear
 
+![Profile Views](https://komarev.com/ghpvc/?username=FirebasePushNotificationsHttpV1)
