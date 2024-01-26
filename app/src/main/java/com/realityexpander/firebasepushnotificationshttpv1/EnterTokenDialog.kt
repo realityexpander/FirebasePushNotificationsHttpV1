@@ -26,6 +26,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
@@ -67,9 +68,12 @@ fun EnterTokenDialog(
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(5.dp))
-                .background(MaterialTheme.colorScheme.surface)
+                .background(Color.Black)
                 .padding(16.dp)
         ) {
+            Text("Firebase Push Notifications HTTP v1", textAlign = TextAlign.Center)
+            Spacer(Modifier.height(16.dp))
+
             OutlinedTextField(
                 value = token,
                 onValueChange = onTokenChange,
