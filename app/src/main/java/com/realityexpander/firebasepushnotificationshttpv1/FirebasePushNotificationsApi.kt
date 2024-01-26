@@ -3,7 +3,7 @@ package com.realityexpander.firebasepushnotificationshttpv1
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface FcmApi {
+interface FirebasePushNotificationsApi {
 
     @POST("/send")
     suspend fun sendMessage(

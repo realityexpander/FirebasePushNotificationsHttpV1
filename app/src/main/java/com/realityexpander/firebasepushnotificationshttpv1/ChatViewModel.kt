@@ -1,6 +1,5 @@
 package com.realityexpander.firebasepushnotificationshttpv1
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -21,7 +20,7 @@ class ChatViewModel: ViewModel() {  // Should use a DI framework to inject the "
     var state by mutableStateOf(ChatState())
         private set
 
-    private val api: FcmApi = Retrofit.Builder()
+    private val api: FirebasePushNotificationsApi = Retrofit.Builder()
         .baseUrl("http://192.168.1.68:8080/") // using the local IP address of the computer running the server
         .addConverterFactory(MoshiConverterFactory.create())// For JSON parsing
         .build()
