@@ -58,7 +58,7 @@ fun ChatScreen(
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth(),
-            text = "Local Token: ${state.localToken.take(15) + "..."}",
+            text = "Local User Token: ${state.localToken.take(15) + "..."}",
             textAlign = TextAlign.Start
         )
         Spacer(Modifier.height(8.dp))
