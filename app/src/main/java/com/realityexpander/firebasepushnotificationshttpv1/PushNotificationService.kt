@@ -6,7 +6,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
-var remoteToken: String? = null
+var currentLocalUserToken: String? = null
 val latestMessageFlow: MutableSharedFlow<String> = MutableSharedFlow()
 
 class PushNotificationService: FirebaseMessagingService() {
@@ -16,8 +16,8 @@ class PushNotificationService: FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         super.onNewToken(token)
 
-        // Update our server with new token
-        remoteToken = token
+        // Possible Use Case: Update our private server with new token for user
+        currentLocalUserToken = token
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
