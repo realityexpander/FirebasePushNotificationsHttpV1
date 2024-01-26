@@ -3,5 +3,7 @@
 [<img width="250" alt="image" src="https://github.com/realityexpander/FirebasePushNotificationsHttpV1/assets/5157474/d379f090-43be-472c-a104-e3fba1908637">]()
 [<img width="250" alt="image" src="https://github.com/realityexpander/FirebasePushNotificationsHttpV1/assets/5157474/d039e474-b722-4145-8394-d5d11c3c1a9f">]()
 
-
+## Developer Notes
+- Notifications only appear when App is in background / sleeping
+- When App is in foreground, the `PushNotificationService.kt` receives the messages and no notifications appear
 
