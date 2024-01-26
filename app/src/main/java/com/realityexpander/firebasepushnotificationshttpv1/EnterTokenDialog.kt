@@ -18,12 +18,18 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -37,11 +43,17 @@ import kotlinx.coroutines.tasks.await
 fun EnterTokenDialog(
     token: String,
     onTokenChange: (String) -> Unit,
-    onSubmit: () -> Unit
+    onSubmit: () -> Unit,
+    onSetLocalToken: (String) -> Unit,
+    state: ChatState
 ) {
     val clipboardManager = LocalClipboardManager.current
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
+
+    LaunchedEffect(Unit) {
+        onSetLocalToken(Firebase.messaging.token.await())
+    }
 
     Dialog(
         onDismissRequest = {},
@@ -63,36 +75,39 @@ fun EnterTokenDialog(
                 onValueChange = onTokenChange,
                 modifier = Modifier.fillMaxWidth(),
                 placeholder = {
-                    Text("Remote user token")
+                    Text("Paste remote user token")
                 },
                 maxLines = 1
             )
             Spacer(Modifier.height(16.dp))
-            Row(
+
+            Text("Local token: ${state.localToken.take(15)+"…"}", textAlign = TextAlign.Center)
+            Column(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
+                verticalArrangement = Arrangement.Center,
             ) {
                 OutlinedButton(
                     onClick = {
                         scope.launch {
-                            val localToken = Firebase.messaging.token.await()
-                            clipboardManager.setText(AnnotatedString(localToken))
+                            clipboardManager.setText(AnnotatedString(state.localToken))
 
                             Toast.makeText(
                                 context,
-                                "Copied local token!",
+                                "Copied local user token!",
                                 Toast.LENGTH_LONG
                             ).show()
                         }
                     }
                 ) {
-                    Text("Copy token")
+                    Text("Copy local user token")
                 }
-                Spacer(Modifier.width(16.dp))
+                Spacer(Modifier.height(16.dp))
+
                 Button(
-                    onClick = onSubmit
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = onSubmit,
                 ) {
-                    Text("Submit")
+                    Text("Chat")
                 }
             }
         }

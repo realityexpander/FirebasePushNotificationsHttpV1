@@ -1,5 +1,6 @@
 package com.realityexpander.firebasepushnotificationshttpv1
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -15,13 +16,13 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
 import java.io.IOException
 
-class ChatViewModel: ViewModel() {  // Use a DI framework to inject the "api" dependency to make this testable
+class ChatViewModel: ViewModel() {  // Should use a DI framework to inject the "api" dependency to make this testable
 
     var state by mutableStateOf(ChatState())
         private set
 
     private val api: FcmApi = Retrofit.Builder()
-        .baseUrl("http://10.0.2.2:8080/") // using the local IP address of this computer running the server
+        .baseUrl("http://192.168.1.68:8080/") // using the local IP address of the computer running the server
         .addConverterFactory(MoshiConverterFactory.create())// For JSON parsing
         .build()
         .create()
@@ -29,6 +30,12 @@ class ChatViewModel: ViewModel() {  // Use a DI framework to inject the "api" de
     init {
         viewModelScope.launch {
             Firebase.messaging.subscribeToTopic("chat").await()
+        }
+
+        viewModelScope.launch {
+            latestMessageFlow.collect { message ->
+                onUpdateMessages(message)
+            }
         }
     }
 
@@ -44,9 +51,21 @@ class ChatViewModel: ViewModel() {  // Use a DI framework to inject the "api" de
         )
     }
 
-    fun onMessageReceived(message: String) {
+    fun onSetLocalToken(newToken: String) {
+        state = state.copy(
+            localToken = newToken
+        )
+    }
+
+    fun onMessageChange(message: String) {
         state = state.copy(
             messageText = message
+        )
+    }
+
+    fun onUpdateMessages(message: String) {
+        state = state.copy(
+            messages = state.messages + message
         )
     }
 

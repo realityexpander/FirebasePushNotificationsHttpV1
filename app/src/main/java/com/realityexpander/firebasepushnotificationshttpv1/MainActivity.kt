@@ -22,6 +22,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestNotificationPermission()
+
         setContent {
             FirebasePushNotificationsHttpV1Theme {
                 Surface(
@@ -33,18 +34,21 @@ class MainActivity : ComponentActivity() {
                         EnterTokenDialog(
                             token = state.remoteToken,
                             onTokenChange = viewModel::onRemoteTokenChange,
-                            onSubmit = viewModel::onSubmitRemoteToken
+                            onSubmit = viewModel::onSubmitRemoteToken,
+                            onSetLocalToken = viewModel::onSetLocalToken,
+                            state = viewModel.state
                         )
                     } else {
                         ChatScreen(
                             messageText = state.messageText,
-                            onMessageSend = {
+                            onSendMessage = {
                                 viewModel.sendMessage(isBroadcast = false)
                             },
-                            onMessageBroadcast = {
+                            onBroadcastMessage = {
                                 viewModel.sendMessage(isBroadcast = true)
                             },
-                            onMessageReceived = viewModel::onMessageReceived
+                            onMessageChanged = viewModel::onMessageChange,
+                            state = viewModel.state
                         )
                     }
                 }
