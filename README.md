@@ -7,7 +7,9 @@
 - Send from 1 user to 1 user
 - Broadcast from 1 user to all users subscribed on a topic
 
-  NOTE: Server must be running & setup properly.
+### IMPORTANT NOTE
+- The Ktor Server must be running & setup properly.
+- Server Code: https://github.com/realityexpander/KtorFirebasePushNotifications
 
 ## Link to video code walkthru:
 - Compose Tips - Updated Firebase Push Notifications for Android
