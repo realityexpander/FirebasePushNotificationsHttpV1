@@ -8,7 +8,7 @@
 - Broadcast from 1 user to all users subscribed on a topic
 
 ### IMPORTANT NOTE
-- The Ktor Server must be running & setup properly.
+- The Ktor Server must be running & setup properly using IntelliJ
 - Server Code: https://github.com/realityexpander/KtorFirebasePushNotifications
 
 ## Link to video code walkthru:
